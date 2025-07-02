@@ -1,9 +1,9 @@
-# %%PROJECT_TITLE%%
+# Web Appliation with Database
 
-[![Terraform CI](https://github.com/%%GH_OWNER%%/%%REPO_SLUG%%/actions/workflows/ci.yml/badge.svg)](https://github.com/%%GH_OWNER%%/%%REPO_SLUG%%/actions/workflows/ci.yml)
-[![Docs – GitHub Pages](https://img.shields.io/badge/docs-gh--pages-blue)](https://%%GH_OWNER%%.github.io/%%REPO_SLUG%%)
+[![Terraform CI](https://github.com/glaisne/WebAppWithDatabase/actions/workflows/ci.yml/badge.svg)](https://github.com/glaisne/WebAppWithDatabase/actions/workflows/ci.yml)
+[![Docs – GitHub Pages](https://img.shields.io/badge/docs-gh--pages-blue)](https://glaisne.github.io/WebAppWithDatabase)
 
-> *Replace* `%%PROJECT_TITLE%%`, `%%REPO_SLUG%%`, and `%%GH_OWNER%%` with real values.  
+> *Replace* `Web Appliation with Database`, `WebAppWithDatabase`, and `glaisne` with real values.  
 > If you use the automation script I shared, the title and slug are filled in automatically—edit the owner once or extend the script to inject it.
 
 ---
