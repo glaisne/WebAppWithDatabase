@@ -38,6 +38,8 @@ sed -i "/<tenant_id>/YOUR_TENANT_ID/" envs/dev.tfvars
 sed -i "/<subscription_id>/YOUR_SUBSCRIPTION_ID/" envs/dev.tfvars
 sed -i "/<resource_group_name>/YOUR_RESOURCE_GROUP_NAME/" envs/dev.tfvars
 sed -i "/<location>/YOUR_LOCATION/" envs/dev.tfvars
+sed -i "/<mssql_username>/YOUR_MSSQL_USERNAME/" envs/dev.tfvars
+sed -i "/<mssql_password>/YOUR_MSSQL_PASSWORD/" envs/dev.tfvars
 
 # 3 Create backend.hcl configuration file
 mv ./backend.hcl.example /backend.hcl
@@ -77,7 +79,9 @@ move-item .\envs\dev.example.tfvars__ .\envs\dev.tfvars
 (get-Content envs/dev.tfvars) -replace "<tenant_id>", "YOUR_TENANT_ID" `
                           -replace "<subscription_id>", "YOUR_SUBSCRIPTION_ID" `
                           -replace "<resource_group_name>", "YOUR_RESOURCE_GROUP_NAME" `
-                          -replace "<location>", "YOUR_LOCATION" | `
+                          -replace "<location>", "YOUR_LOCATION" `
+                          -replace "<mssql_username>", "YOUR_MSSQL_USERNAME" `
+                          -replace "<mssql_password>", "YOUR_MSSQL_PASSWORD" | `
     Set-Content envs/dev.tfvars
 
 # 3 Create backend.hcl configuration file
