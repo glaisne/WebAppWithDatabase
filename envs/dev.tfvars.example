@@ -1,0 +1,8 @@
+tenant_id = "<tenant_id>"
+subscription_id = "<subscription_id>"
+resource_group_name = "<resource_group_name>"
+location = "<location>"
+mssql_credentials = {
+    username = "<mssql_username>"
+    password = "<mssql_password>"
+}
