@@ -1,0 +1,54 @@
+# .github/workflows/ci.yml
+name: Terraform CI
+
+on: [push, pull_request]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: setup terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.12.1
+
+      - name: Write backend.hcl from secrets
+        run: |
+          echo "=============================================================="
+          echo "Creating backend.hcl"
+          echo "=============================================================="
+          cat <<EOF > backend.hcl
+          use_azuread_auth     = true
+          subscription_id      = "${{ secrets.ARM_SUBSCRIPTION_ID }}"
+          tenant_id            = "${{ secrets.ARM_TENANT_ID }}"
+          resource_group_name  = "${{ secrets.STATE_RG }}"
+          storage_account_name = "${{ secrets.STATE_SA }}"
+          container_name       = "${{ secrets.STATE_CONTAINER }}"
+          key                  = "${{ secrets.STATE_KEY }}.tfstate"
+          EOF
+          cat backend.hcl
+
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.TF_CREDS }}
+
+      - name: Format & Validate
+        run: |
+          terraform fmt -recursive
+          terraform init -backend-config=backend.hcl
+          terraform validate
+
+      - uses: terraform-linters/setup-tflint@v4
+      - run: tflint --init && tflint
+
+    #   - uses: aquasecurity/tfsec-action@v1
+
+    #   - uses: infracost/actions@v2
+    #     env:
+    #       INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}
+    #     with:
+    #       path: .
